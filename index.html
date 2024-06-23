@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="PimpMyScan - Tool to scan and create record">
+		<meta name="author" content="LeLapinDeLaForet">
+		<title>PimpMyScan - Tool to scan and create record</title>
+		<link rel="stylesheet" href="mini-default.min.css">
+		<link rel="stylesheet" href="PimpMyScan.css">
+		<script type="text/javascript" src="date.format.js"></script>
+		<script type="text/javascript" src="xlsx.full.min.js"></script>
+		<script type="text/javascript" src="PimpMyScan.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div id="DivHeader" class="center">
+				<h2>PimpMyScan</h2>
+				<h3>Current time: <span id="Timer"></span></h3>
+				<div id="DivAction" class="center">
+					<button onclick="Insert('TabData');">Insert</button>
+					<button onclick="Save('TabData');">Save</button>
+				</div>
+			</div>
+			<div id="DivData" class="center">
+				<br />
+				<table id="TabData" class="striped">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Sender</th>
+							<th>Tracking number</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Dynamically filled -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
