@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="PimpMyScan.css">
 		<script type="text/javascript" src="date.format.js"></script>
 		<script type="text/javascript" src="xlsx.full.min.js"></script>
+		<script type="text/javascript" src="JsBarcode.all.min.js"></script>
 		<script type="text/javascript" src="PimpMyScan.js"></script>
 	</head>
 	<body>
@@ -18,8 +19,13 @@
 				<h3>Current time: <span id="Timer"></span></h3>
 				<div id="DivAction" class="center">
 					<button onclick="Insert('TabData');">Insert</button>
+					<button onclick="Export('TabData');">Export Excel</button>
+					<span> - </span>
+					<button onclick="Clear('TabData');">Clear</button>
 					<button onclick="Save('TabData');">Save</button>
+					<button onclick="Load('TabData');">Load</button>
 				</div>
+				<a href="barcode.html">Barcode</a>
 			</div>
 			<div id="DivData" class="center">
 				<br />

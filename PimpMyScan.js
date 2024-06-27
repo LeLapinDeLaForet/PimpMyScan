@@ -52,10 +52,10 @@ function GenRandom(length, number = true, extrachar = false)
 // Insert data in specified table
 function Insert(table)
 {
-	var item = document.getElementById(table);
-	if (item)
+	var tbody = document.getElementById(table).getElementsByTagName("tbody")[0];
+	if (tbody)
 	{
-		var row = item.insertRow(-1);
+		var row = tbody.insertRow(-1);
 		var date = row.insertCell(-1);
 		var time = row.insertCell(-1);
 		var sender = row.insertCell(-1);
@@ -71,8 +71,8 @@ function Insert(table)
 	}
 }
 
-// Save the content of specified table
-function Save(table)
+// Export to Excel the content of specified table
+function Export(table)
 {
 	var item = document.getElementById(table);
 	if (item)
@@ -81,6 +81,72 @@ function Save(table)
 		var wb = XLSX.utils.table_to_book(item, opts);
 		var filename = "PimpMyScan_" + GetDate("yyyymmdd") + "_" + GetDate("HHMMss") + ".xlsx";
 		XLSX.writeFile(wb, filename);
+	}
+}
+
+// Clear the content of specified table
+function Clear(table)
+{
+	var tbody = document.getElementById(table).getElementsByTagName("tbody")[0];
+	if (tbody)
+	{
+		while (tbody.rows.length > 0)
+		{
+			tbody.rows[0].remove();
+		}
+	}
+}
+
+// Save the content of specified table in localStorage
+function Save(table)
+{
+	var item = document.getElementById(table);
+	if (item)
+	{
+		var arr = [];
+		item.querySelectorAll("tbody tr").forEach((elem, index) =>
+		{
+			//if (elem.parentNode.localName != "thead")
+			{
+				var row = 
+				{
+					date: elem.cells[0].innerHTML,
+					time: elem.cells[1].innerHTML,
+					sender: elem.cells[2].innerHTML,
+					tracking: elem.cells[3].innerHTML,
+				}
+				arr.push(row);
+			}
+		});
+		localStorage.setItem(table, JSON.stringify(arr));
+	}
+}
+
+// Load the content of specified table from localStorage
+function Load(table)
+{
+	var tbody = document.getElementById(table).getElementsByTagName("tbody")[0];
+	if (tbody)
+	{
+		Clear(table);
+		
+		var arr = JSON.parse(localStorage.getItem(table));
+		arr.forEach((elem) =>
+		{
+			var row = tbody.insertRow(-1);
+			var date = row.insertCell(-1);
+			var time = row.insertCell(-1);
+			var sender = row.insertCell(-1);
+			var tracking = row.insertCell(-1);
+			date.setAttribute("data-t", "s");
+			date.innerHTML = elem.date;
+			time.setAttribute("data-t", "s");
+			time.innerHTML = elem.time;
+			sender.setAttribute("data-t", "s");
+			sender.innerHTML = elem.sender;
+			tracking.setAttribute("data-t", "s");
+			tracking.innerHTML = elem.tracking;
+		});
 	}
 }
 
